@@ -1,39 +1,307 @@
-/* Media query for Tablet (up to 768px) */
-@media screen and (max-width: 768px) {
+/* Base styles (mobile-first approach) */
+.container {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.nav-menu {
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.grid {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 300px;
+  margin: 0.5rem 0;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+.mode-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.carousel {
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-item {
+  width: 100%;
+  height: 200px; /* Mobil için daha küçük yükseklik */
+}
+
+/* Tablet (min-width: 481px) */
+@media screen and (min-width: 481px) {
   .container {
     width: 90%;
     padding: 0 15px;
-  }
-  
-  .nav-menu {
-    flex-direction: column;
-    gap: 1rem;
+    margin: 0 auto;
   }
   
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-
-/* Media query for Mobile (up to 480px) */
-@media screen and (max-width: 480px) {
-  .grid {
-    grid-template-columns: 1fr;
+  
+  h1 {
+    font-size: 1.8rem;
   }
   
-  .header {
-    padding: 1rem;
+  .search-box {
+    max-width: 400px;
+  }
+  
+  .carousel-item {
+    height: 300px;
+  }
+  
+  .mode-toggle {
+    bottom: 30px;
+    right: 30px;
+  }
+}
+
+/* Desktop (min-width: 769px) */
+@media screen and (min-width: 769px) {
+  .container {
+    width: 85%;
+    max-width: 1200px;
   }
   
   .nav-menu {
-    padding: 0.5rem;
+    flex-direction: row;
+    gap: 2rem;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
   }
   
   h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   
-  p {
-    font-size: 0.9rem;
+  .search-box {
+    max-width: 500px;
+    margin: 0;
   }
+  
+  .search-input {
+    padding: 10px;
+    font-size: 1rem;
+  }
+  
+  .carousel-item {
+    height: 400px;
+  }
+  
+  .mode-toggle {
+    top: 20px; /* Desktop'ta üst köşeye taşı */
+    right: 40px;
+    bottom: auto;
+  }
+}
+
+/* Large screens (min-width: 1200px) */
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 80%;
+  }
+  
+  .carousel-item {
+    height: 500px;
+  }
+  
+  .search-box {
+    max-width: 600px;
+  }
+}
+
+/* Ensure images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better touch targets for mobile */
+button, 
+.nav-link {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Car cards container */
+.cars-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+/* Car card styles */
+.car-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.car-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.car-info {
+  padding: 1rem;
+}
+
+.car-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.car-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.car-price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: right;
+  color: var(--primary-color);
+}
+
+.car-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+  .cars-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1024px) {
+  .cars-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .car-image {
+    height: 200px;
+  }
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  display: none;
+  padding: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mobile menu container */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 80%;
+  max-width: 300px;
+  background: var(--card-bg);
+  padding: 1rem;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.mobile-menu.active {
+  display: block;
+}
+
+/* Base styles for desktop */
+.search-container,
+.mode-toggle {
+  display: block;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .search-container,
+  .mode-toggle {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Move these elements to mobile menu */
+  .mobile-menu .search-container,
+  .mobile-menu .mode-toggle {
+    display: block;
+    margin: 1rem 0;
+  }
+  
+  .mobile-menu .mode-toggle {
+    position: static;
+    margin-top: 2rem;
+  }
+  
+  .mobile-menu .search-box {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* Mobile menu overlay */
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+}
+
+/* Mobile menu slide animation */
+.mobile-menu-enter {
+  transform: translateX(100%);
+}
+
+.mobile-menu-enter-active {
+  transform: translateX(0);
+  transition: transform 0.3s ease-out;
+}
+
+.mobile-menu-exit {
+  transform: translateX(0);
+}
+
+.mobile-menu-exit-active {
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in;
 } 

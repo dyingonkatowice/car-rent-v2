@@ -43,94 +43,80 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
     setShowRentModal(true);
   };
 
+  // only show 3 cars
+  const displayedCars = cars.slice(0, 3);
+
   return (
     <>
-      <div className="relative w-full overflow-hidden rounded-xl">
-        <div className="relative h-[600px]">
-          <div
-            className={cn(
-              "flex transition-transform duration-500 ease-out h-full",
-              isAnimating ? "pointer-events-none" : ""
-            )}
-            style={{
-              transform: `translateX(-${currentIndex * 100}%)`,
-            }}
-          >
-            {cars.slice(0, 3).map((car) => ( // Limit to 3 cars
-              <div
-                key={car.id}
-                className="relative w-full flex-shrink-0 cursor-pointer h-full group"
-                onClick={() => onCarSelect(car)}
-              >
+      <div className="relative w-full overflow-hidden rounded-lg border border-border shadow-lg">
+        <div 
+          className="flex transition-transform duration-500 ease-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {displayedCars.map((car, index) => (
+            <div 
+              key={car.id}
+              className="w-full flex-shrink-0 cursor-pointer"
+              onClick={() => onCarSelect(car)}
+            >
+              <div className="relative aspect-[16/9] md:aspect-[21/9]">
                 <img
                   src={car.imageUrl}
                   alt={car.name}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
                 
-                {/* Car Info and Buttons */}
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                  <div className="flex justify-between items-end">
-                    <h3 className="text-3xl font-bold">{car.name}</h3>
-                    <div className="flex gap-3">
-                      <Button 
-                        variant="outline" 
-                        className="bg-black hover:bg-zinc-800 text-white hover:text-white border-white text-sm px-4 py-2 h-auto transition-all"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onCarSelect(car);
-                        }}
-                      >
-                        <Info className="h-4 w-4 mr-2" />
-                        More Details
-                      </Button>
-                      <Button 
-                        className="bg-primary hover:bg-primary/90 text-sm px-4 py-2 h-auto transition-all"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleRentClick(car);
-                        }}
-                      >
-                        <Car className="h-4 w-4 mr-2" />
-                        Rent Now
-                      </Button>
-                    </div>
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
+                  <h3 className="text-2xl md:text-3xl font-bold drop-shadow-lg">
+                    {car.name}
+                  </h3>
+                  <div className="flex items-center justify-between mt-2">
+                    <p className="text-lg opacity-90 drop-shadow-lg">
+                      {car.specs.price}/day
+                    </p>
+                    <Button 
+                      className="bg-black/40 hover:bg-black/60 text-white backdrop-blur-sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onCarSelect(car);
+                      }}
+                    >
+                      View Details
+                    </Button>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
 
-          {/* Navigation Buttons */}
-          <button
-            onClick={handlePrevious}
-            className="absolute left-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 hover:bg-black/40 transition-colors text-white"
-          >
-            <ChevronLeft className="h-8 w-8" />
-          </button>
-          <button
-            onClick={handleNext}
-            className="absolute right-6 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 hover:bg-black/40 transition-colors text-white"
-          >
-            <ChevronRight className="h-8 w-8" />
-          </button>
+        {/* Navigation Buttons */}
+        <button
+          onClick={handlePrevious}
+          className="absolute left-2 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 hover:bg-black/40 transition-colors"
+        >
+          <ChevronLeft className="h-6 w-6 text-white" />
+        </button>
+        <button
+          onClick={handleNext}
+          className="absolute right-2 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 hover:bg-black/40 transition-colors"
+        >
+          <ChevronRight className="h-6 w-6 text-white" />
+        </button>
 
-          {/* Indicators */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            {cars.slice(0, 3).map((_, index) => ( // Limit indicators to 3
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={cn(
-                  "w-2.5 h-2.5 rounded-full transition-colors",
-                  currentIndex === index
-                    ? "bg-white"
-                    : "bg-white/50 hover:bg-white/75"
-                )}
-              />
-            ))}
-          </div>
+        {/* Dots */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+          {displayedCars.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-2 h-2 rounded-full transition-colors ${
+                index === currentIndex ? 'bg-white' : 'bg-white/50'
+              }`}
+            />
+          ))}
         </div>
       </div>
 

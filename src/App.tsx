@@ -397,6 +397,7 @@ const searchableCars = allCars;
 function App() {
   const [selectedCar, setSelectedCar] = useState<(typeof allCars)[0] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleOpenModal = (car: (typeof allCars)[0]) => {
     setSelectedCar(car);

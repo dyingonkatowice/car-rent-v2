@@ -23,7 +23,7 @@ interface CarCardProps {
   onSelect: () => void;
 }
 
-const CarCard = ({ name, year, transmission, imageUrl, specs }: CarCardProps) => {
+const CarCard = ({ name, year, transmission, imageUrl, specs, onSelect }: CarCardProps) => {
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isRentModalOpen, setIsRentModalOpen] = useState(false);
 
@@ -40,56 +40,58 @@ const CarCard = ({ name, year, transmission, imageUrl, specs }: CarCardProps) =>
   return (
     <>
       <div 
-        className="bg-card rounded-lg overflow-hidden border border-border hover:border-primary/20 cursor-pointer group"
-        onClick={() => setIsDetailsModalOpen(true)}
+        className="group relative bg-card rounded-lg border border-border shadow-sm hover:shadow-lg transition-all overflow-hidden cursor-pointer"
+        onClick={() => onSelect()}
       >
-        <div className="relative h-48">
+        <div className="aspect-[16/9] overflow-hidden">
           <img
             src={imageUrl}
             alt={name}
             className="w-full h-full object-cover transition-transform group-hover:scale-105"
           />
-          <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm px-3 py-1 rounded-full">
-            <span className="text-foreground font-semibold">{specs.price}/day</span>
-          </div>
         </div>
 
-        <div className="p-4">
-          <h3 className="text-lg font-semibold text-card-foreground">{name}</h3>
-          <p className="text-muted-foreground">{year} · {transmission}</p>
+        <div className="p-4 space-y-3">
+          <div className="flex items-start justify-between">
+            <div>
+              <h3 className="font-semibold text-lg">{name}</h3>
+              <p className="text-sm text-muted-foreground">{year} · {transmission}</p>
+            </div>
+            <p className="font-bold text-right">
+              {specs.price}<span className="text-sm font-normal">/day</span>
+            </p>
+          </div>
 
-          <div className="grid grid-cols-2 gap-4 mt-4 text-sm text-muted-foreground">
+          <div className="grid grid-cols-2 gap-2 text-sm">
             <div className="flex items-center gap-2">
-              <CarIcon className="h-4 w-4" />
-              <span>{specs.engine}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Gauge className="h-4 w-4" />
-              <span>{specs.power}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Fuel className="h-4 w-4" />
+              <Fuel className="h-4 w-4 text-primary" />
               <span>{specs.fuelType}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Users className="h-4 w-4" />
+              <Users className="h-4 w-4 text-primary" />
               <span>{specs.seating} seats</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 mt-6">
+          <div className="flex gap-2 pt-3">
             <Button
-              onClick={handleRentClick}
-              className="w-full"
+              variant="outline"
+              className="flex-1"
+              onClick={(e) => {
+                e.stopPropagation();
+                onSelect();
+              }}
             >
-              Rent
+              Details
             </Button>
             <Button
-              onClick={handleDetailsClick}
-              variant="secondary"
-              className="w-full"
+              className="flex-1"
+              onClick={(e) => {
+                e.stopPropagation();
+                onSelect();
+              }}
             >
-              More Details
+              Rent Now
             </Button>
           </div>
         </div>
