@@ -226,26 +226,6 @@ const carSpecs: CarSpecsType = {
 };
 
 // Featured cars for carousel
-const featuredCars = [
-  {
-    id: 1,
-    name: 'Mercedes AMG GT',
-    imageUrl: mercedesAmgGt,
-    specs: carSpecs['Mercedes AMG GT']
-  },
-  {
-    id: 2,
-    name: 'BMW M4 Competition',
-    imageUrl: bmwM4,
-    specs: carSpecs['BMW M4 Competition']
-  },
-  {
-    id: 3,
-    name: 'Audi RS7 Sportback',
-    imageUrl: audiRs7,
-    specs: carSpecs['Audi RS7 Sportback']
-  }
-];
 
 // All cars for search and recommended sections
 const allCars = [
