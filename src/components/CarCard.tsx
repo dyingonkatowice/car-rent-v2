@@ -2,7 +2,7 @@ import { useState } from 'react';
 import RentModal from './RentModal';
 import CarDetailsModal from './CarDetailsModal';
 import { Button } from './ui/button';
-import { Car as CarIcon, Gauge, Fuel, Users } from 'lucide-react';
+import { Car as Fuel, Users } from 'lucide-react';
 
 interface CarSpec {
   engine: string;
@@ -26,16 +26,6 @@ interface CarCardProps {
 const CarCard = ({ name, year, transmission, imageUrl, specs, onSelect }: CarCardProps) => {
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isRentModalOpen, setIsRentModalOpen] = useState(false);
-
-  const handleDetailsClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsDetailsModalOpen(true);
-  };
-
-  const handleRentClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsRentModalOpen(true);
-  };
 
   return (
     <>

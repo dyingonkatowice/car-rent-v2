@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight, Info, Car } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import RentModal from "@/components/RentModal";
 
@@ -27,8 +26,8 @@ interface CarouselProps {
 const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showRentModal, setShowRentModal] = useState(false);
-  const [isAnimating] = useState(false);
-  const [selectedCar, setSelectedCar] = useState<CarouselProps['cars'][0] | null>(null);
+  const [] = useState(false);
+  const [selectedCar] = useState<CarouselProps['cars'][0] | null>(null);
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
@@ -38,10 +37,6 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
     setCurrentIndex((prevIndex) => (prevIndex === 2 ? 0 : prevIndex + 1));
   };
 
-  const handleRentClick = (car: CarouselProps['cars'][0]) => {
-    setSelectedCar(car);
-    setShowRentModal(true);
-  };
 
   // only show 3 cars
   const displayedCars = cars.slice(0, 3);
@@ -53,7 +48,7 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {displayedCars.map((car, index) => (
+          {displayedCars.map((car) => (
             <div 
               key={car.id}
               className="w-full flex-shrink-0 cursor-pointer"
