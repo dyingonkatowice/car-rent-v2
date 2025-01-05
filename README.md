@@ -2,6 +2,10 @@
 
 This is a car rental application built with Vite,React, Tailwind CSS, and TypeScript. It allows users to search for cars, view detailed information about each car, and rent a car.
 
+# Live Preview
+
+https://rent-car-v2.netlify.app/
+
 # Installation
 
 1. Clone the repository
