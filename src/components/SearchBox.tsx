@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { Search, ChevronUp, ChevronDown, X, Calendar, Cog } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
+import { debounce } from 'lodash';
 
 interface SearchBoxProps {
   cars: Array<{
@@ -46,18 +47,26 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
   const fuelTypes = Array.from(new Set(cars.map(car => car.specs.fuelType)));
   const seatingOptions = Array.from(new Set(cars.map(car => car.specs.seating)));
 
+  // Optimize edilmiş arama fonksiyonu
   const filteredCars = useMemo(() => {
-    if (!searchQuery) return [];
-    return cars.filter(car =>
-      car.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      car.transmission.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      car.specs.engine.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      car.specs.fuelType.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      car.specs.power.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      car.year.toString().includes(searchQuery) ||
-      car.specs.price.toLowerCase().includes(searchQuery)
-    ).slice(0, 5);
+    if (!searchQuery || searchQuery.length < 2) return [];
+    
+    const query = searchQuery.toLowerCase().trim();
+    const results = cars.filter(car => {
+      const carName = car.name.toLowerCase();
+      return carName.includes(query);
+    });
+
+    return results.slice(0, 5);
   }, [searchQuery, cars]);
+
+  // Debounce edilmiş arama input işleyicisi
+  const debouncedSetSearchQuery = useCallback(
+    debounce((value: string) => {
+      setSearchQuery(value);
+    }, 300),
+    []
+  );
 
   const handleAdvancedSearch = () => {
     let filtered = [...cars];
@@ -127,10 +136,10 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
         <div className="relative flex-1">
           <input
             type="text"
-            placeholder="Search for cars, year, fuel type, or engine power..."
-            value={searchQuery}
+            placeholder="Search for cars..."
+            defaultValue={searchQuery}
             onChange={(e) => {
-              setSearchQuery(e.target.value);
+              debouncedSetSearchQuery(e.target.value);
               setIsDropdownOpen(true);
             }}
             onFocus={() => {
@@ -180,11 +189,11 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
 
       {/* Advanced Search Panel */}
       {showAdvanced && (
-        <div className="absolute top-full left-0 right-0 mt-1 p-6 rounded-lg border border-border bg-background shadow-lg z-50">
+        <div className="absolute top-full left-0 right-0 mt-2 p-6 rounded-lg border border-border bg-card shadow-lg z-50">
           <div className="space-y-6">
             {/* Price Range */}
             <div className="space-y-2">
-              <label className="text-sm font-medium">Price Range ($/day)</label>
+              <label className="text-sm font-medium">Price Range (PLN/day)</label>
               <Slider
                 value={priceRange}
                 onValueChange={setPriceRange}
@@ -194,8 +203,8 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
                 className="w-full"
               />
               <div className="flex justify-between text-sm">
-                <span>${priceRange[0]}</span>
-                <span>${priceRange[1]}</span>
+                <span>PLN {priceRange[0]}</span>
+                <span>PLN {priceRange[1]}</span>
               </div>
             </div>
 
@@ -327,7 +336,7 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-end gap-2 pt-4 border-t">
               <button
                 className="px-4 py-2 text-sm rounded-md border border-input hover:bg-accent"
                 onClick={() => {
