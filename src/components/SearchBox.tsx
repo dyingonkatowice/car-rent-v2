@@ -1,10 +1,9 @@
 import { useState, useMemo, useCallback } from 'react';
-import { Search, ChevronUp, ChevronDown, X, Calendar, Cog } from 'lucide-react';
+import { Search, ChevronUp, ChevronDown, Calendar, Cog } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { debounce } from 'lodash';
-import { Pagination } from '@/components/ui/pagination'; // Import Pagination component
 
 interface SearchBoxProps {
   cars: Array<{
@@ -32,7 +31,7 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [advancedSearchResults, setAdvancedSearchResults] = useState<SearchBoxProps['cars']>([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage] = useState(1);
   const resultsPerPage = 6; // Set number of results per page
 
   // Advanced search states
@@ -66,8 +65,6 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
     const startIndex = (currentPage - 1) * resultsPerPage;
     return filteredCars.slice(startIndex, startIndex + resultsPerPage);
   }, [filteredCars, currentPage, resultsPerPage]);
-
-  const totalPages = Math.ceil(filteredCars.length / resultsPerPage);
 
   const debouncedSetSearchQuery = useCallback(
     debounce((value: string) => {
@@ -212,6 +209,10 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
               {/* Price Range */}
               <div className="space-y-2">
                 <label className="text-sm font-medium">Price Range (PLN/day)</label>
+                <div className="flex justify-between text-sm text-muted-foreground">
+                  <span>PLN {priceRange[0]}</span>
+                  <span>PLN {priceRange[1]}</span>
+                </div>
                 <Slider
                   value={priceRange}
                   onValueChange={setPriceRange}
@@ -220,10 +221,6 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
                   step={50}
                   className="w-full"
                 />
-                <div className="flex justify-between text-sm">
-                  <span>PLN {priceRange[0]}</span>
-                  <span>PLN {priceRange[1]}</span>
-                </div>
               </div>
 
               {/* Power and Acceleration */}
