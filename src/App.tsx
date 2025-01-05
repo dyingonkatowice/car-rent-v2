@@ -412,14 +412,7 @@ const allCars = [
 ];
 
 // Combine featured cars with all cars for search functionality 
-const searchableCars = [
-  ...featuredCars.map(car => ({
-    ...car,
-    year: 2024,
-    transmission: 'automatic'
-  })),
-  ...allCars
-];
+const searchableCars = allCars;
 
 function App() {
   const [selectedCar, setSelectedCar] = useState<(typeof allCars)[0] | null>(null);
