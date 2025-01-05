@@ -9,8 +9,9 @@ https://rent-car-v2.netlify.app/
 # Installation
 
 1. Clone the repository
-2. Run `npm install` to install the dependencies
-3. Run `npm run dev` to start the development server
+2. Run `pnpm install` to install the dependencies
+3. Run `pnpm run dev` to start the development server
+
 
 # Usage
 
