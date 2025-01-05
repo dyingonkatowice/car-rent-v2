@@ -23,7 +23,7 @@ interface CarCardProps {
   onSelect: () => void;
 }
 
-const CarCard = ({ name, year, transmission, imageUrl, specs, onSelect }: CarCardProps) => {
+const CarCard = ({ name, year, transmission, imageUrl, specs }: CarCardProps) => {
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isRentModalOpen, setIsRentModalOpen] = useState(false);
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Car, Fuel, Gauge, Power, Users, Calendar, DollarSign, Cog, X } from "lucide-react";
+import { Car, Fuel, Gauge, Power, Users, DollarSign, Cog } from "lucide-react";
 import RentModal from "@/components/RentModal";
 
 interface CarDetailsModalProps {

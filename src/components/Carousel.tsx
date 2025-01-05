@@ -26,16 +26,16 @@ interface CarouselProps {
 
 const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [showRentModal, setShowRentModal] = useState(false);
+  const [isAnimating] = useState(false);
   const [selectedCar, setSelectedCar] = useState<CarouselProps['cars'][0] | null>(null);
 
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? cars.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === cars.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) => (prevIndex === 2 ? 0 : prevIndex + 1));
   };
 
   const handleRentClick = (car: CarouselProps['cars'][0]) => {
@@ -56,7 +56,7 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
               transform: `translateX(-${currentIndex * 100}%)`,
             }}
           >
-            {cars.map((car) => (
+            {cars.slice(0, 3).map((car) => ( // Limit to 3 cars
               <div
                 key={car.id}
                 className="relative w-full flex-shrink-0 cursor-pointer h-full group"
@@ -118,7 +118,7 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
 
           {/* Indicators */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            {cars.map((_, index) => (
+            {cars.slice(0, 3).map((_, index) => ( // Limit indicators to 3
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}

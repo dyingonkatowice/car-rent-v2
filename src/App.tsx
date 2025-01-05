@@ -409,7 +409,7 @@ const allCars = [
     imageUrl: volkswagenGolf,
     specs: carSpecs['Volkswagen Golf R']
   }
-] as const;
+];
 
 // Combine featured cars with all cars for search functionality 
 const searchableCars = [
@@ -437,7 +437,7 @@ function App() {
         {/* Carousel Section */}
         <section>
           <h2 className="text-3xl font-bold text-foreground mb-6">Most Rented Cars</h2>
-          <Carousel cars={featuredCars} onCarSelect={handleOpenModal} />
+          <Carousel cars={searchableCars} onCarSelect={handleOpenModal} />
         </section>
 
         {/* Recommended Cars Section */}
