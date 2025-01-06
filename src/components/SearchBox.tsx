@@ -4,28 +4,14 @@ import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { debounce } from 'lodash';
+import { Car } from '@/data';
 
 interface SearchBoxProps {
-  cars: Array<{
-    id: number;
-    name: string;
-    year: number;
-    transmission: string;
-    imageUrl: string;
-    specs: {
-      engine: string;
-      power: string;
-      acceleration: string;
-      fuelType: string;
-      seating: string;
-      price: string;
-      description: string;
-    };
-  }>;
-  onCarSelect: (car: SearchBoxProps['cars'][0]) => void;
+  cars: Car[];
+  onSelect: (car: Car) => void;
 }
 
-const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
+const SearchBox = ({ cars, onSelect }: SearchBoxProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -78,8 +64,7 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
 
     // Price filter
     filtered = filtered.filter(car => {
-      const price = parseInt(car.specs.price.replace(/[^\d]/g, ''));
-      return price >= priceRange[0] && price <= priceRange[1];
+      return Number(car.specs.price) >= priceRange[0] && Number(car.specs.price) <= priceRange[1];
     });
 
     // Transmission filter
@@ -94,19 +79,20 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
 
     // Seating filter
     if (selectedSeats.length > 0) {
-      filtered = filtered.filter(car => selectedSeats.includes(car.specs.seating));
+      filtered = filtered.filter(car => {
+        const seatCount = car.specs.seating.toString();
+        return selectedSeats.includes(seatCount);
+      });
     }
 
     // Power filter
     filtered = filtered.filter(car => {
-      const power = parseInt(car.specs.power.replace(/[^\d]/g, ''));
-      return power >= minPower;
+      return car.specs.power >= minPower;
     });
 
     // Acceleration filter
     filtered = filtered.filter(car => {
-      const acceleration = parseFloat(car.specs.acceleration.match(/\d+\.\d+/)?.[0] || '0');
-      return acceleration <= maxAcceleration;
+      return car.specs.acceleration <= maxAcceleration;
     });
 
     // Sorting
@@ -117,19 +103,13 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
           comparison = a.name.localeCompare(b.name);
           break;
         case 'price':
-          const priceA = parseInt(a.specs.price.replace(/[^\d]/g, ''));
-          const priceB = parseInt(b.specs.price.replace(/[^\d]/g, ''));
-          comparison = priceA - priceB;
+          comparison = Number(a.specs.price) - Number(b.specs.price);
           break;
         case 'power':
-          const powerA = parseInt(a.specs.power.replace(/[^\d]/g, ''));
-          const powerB = parseInt(b.specs.power.replace(/[^\d]/g, ''));
-          comparison = powerA - powerB;
+          comparison = Number(a.specs.power) - Number(b.specs.power);
           break;
         case 'acceleration':
-          const aAcc = parseFloat(a.specs.acceleration.match(/\d+\.\d+/)?.[0] || '0');
-          const bAcc = parseFloat(b.specs.acceleration.match(/\d+\.\d+/)?.[0] || '0');
-          comparison = aAcc - bAcc;
+          comparison = a.specs.acceleration - b.specs.acceleration;
           break;
       }
       return sortOrder === 'asc' ? comparison : -comparison;
@@ -170,7 +150,7 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
                     key={car.id}
                     className="p-3 hover:bg-accent cursor-pointer border-b border-border last:border-0"
                     onClick={() => {
-                      onCarSelect(car);
+                      onSelect(car);
                       setSearchQuery('');
                       setIsDropdownOpen(false);
                     }}
@@ -304,12 +284,13 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
                     {seatingOptions.map(seating => (
                       <div key={seating} className="flex items-center">
                         <Checkbox
-                          checked={selectedSeats.includes(seating)}
+                          checked={selectedSeats.includes(seating.toString())}
                           onCheckedChange={(checked) => {
+                            const seatCount = seating.toString();
                             if (checked) {
-                              setSelectedSeats([...selectedSeats, seating]);
+                              setSelectedSeats([...selectedSeats, seatCount]);
                             } else {
-                              setSelectedSeats(selectedSeats.filter(s => s !== seating));
+                              setSelectedSeats(selectedSeats.filter(s => s !== seatCount));
                             }
                           }}
                         />
@@ -394,7 +375,7 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
                       key={car.id}
                       className="bg-muted rounded-lg overflow-hidden cursor-pointer hover:bg-accent transition-colors"
                       onClick={() => {
-                        onCarSelect(car);
+                        onSelect(car);
                         setShowSearchResults(false);
                         setShowAdvanced(false);
                       }}

@@ -1,28 +1,14 @@
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Car, Fuel, Gauge, Power, Users, DollarSign, Cog } from "lucide-react";
+import { Fuel, Gauge, Power, Users, DollarSign, Cog } from "lucide-react";
 import RentModal from "@/components/RentModal";
+import { Car } from '@/data';
 
 interface CarDetailsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  car: {
-    id: number;
-    name: string;
-    year: number;
-    transmission: string;
-    imageUrl: string;
-    specs: {
-      engine: string;
-      power: string;
-      acceleration: string;
-      fuelType: string;
-      seating: string;
-      price: string;
-      description: string;
-    };
-  };
+  car: Car;
 }
 
 const CarDetailsModal = ({ isOpen, onClose, car }: CarDetailsModalProps) => {
@@ -84,7 +70,7 @@ const CarDetailsModal = ({ isOpen, onClose, car }: CarDetailsModalProps) => {
               <DollarSign className="h-8 w-8 text-primary" />
               <div>
                 <p className="text-sm text-muted-foreground">Price per day</p>
-                <p className="font-medium">{car.specs.price.replace('$', 'PLN')}</p>
+                <p className="font-medium">{car.specs.price}</p>
               </div>
             </div>
           </div>
@@ -138,7 +124,6 @@ const CarDetailsModal = ({ isOpen, onClose, car }: CarDetailsModalProps) => {
               onClick={() => setShowRentModal(true)}
               className="w-full md:w-auto gap-2"
             >
-              <Car className="h-4 w-4" />
               Rent Now
             </Button>
           </div>

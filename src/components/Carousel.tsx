@@ -2,32 +2,18 @@ import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import RentModal from "@/components/RentModal";
+import { Car } from '@/data';
 
 interface CarouselProps {
-  cars: Array<{
-    id: number;
-    name: string;
-    imageUrl: string;
-    year: number;
-    transmission: string;
-    specs: {
-      engine: string;
-      power: string;
-      acceleration: string;
-      fuelType: string;
-      seating: string;
-      price: string;
-      description: string;
-    };
-  }>;
-  onCarSelect: (car: CarouselProps['cars'][0]) => void;
+  cars: Car[];
+  onCarSelect: (car: Car) => void;
 }
 
 const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showRentModal, setShowRentModal] = useState(false);
   const [] = useState(false);
-  const [selectedCar] = useState<CarouselProps['cars'][0] | null>(null);
+  const [selectedCar] = useState<Car | null>(null);
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));

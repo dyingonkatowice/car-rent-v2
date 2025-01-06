@@ -31,6 +31,10 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
     onClose();
   };
 
+/*  function setShowCarDetails(arg0: boolean): void {
+    throw new Error('Function not implemented.');
+  }*/
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[500px]">
@@ -42,6 +46,13 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
           <DialogDescription>
             Please fill out the form below to rent the vehicle. All fields are required.
           </DialogDescription>
+          <Button 
+            variant="default"
+            className="mt-2 h-8 text-sm"
+            onClick={() => onClose()}
+          >
+            View Car Details
+          </Button>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6 mt-4">

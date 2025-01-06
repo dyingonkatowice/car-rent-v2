@@ -12,9 +12,9 @@ const Header = ({ allCars, onCarSelect }: HeaderProps) => {
   return (
     <header className="sticky top-0 z-50 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Logo - solda */}
+        {/* Logo -  LEFT */}
         <div className="w-[200px]">
-          <h1 className="text-xl font-bold">Rent-A-Car</h1>
+          <h1 className="text-xl font-bold hover:scale-105 transition-all duration-300">Rent-A-Car</h1>
         </div>
 
         {/* Search - MIDDLE */}
