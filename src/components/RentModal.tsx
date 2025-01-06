@@ -1,11 +1,28 @@
-import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon, Car as CarIcon, Mail, Phone, User, MapPin } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  CalendarIcon,
+  Car as CarIcon,
+  Mail,
+  Phone,
+  User,
+  MapPin,
+} from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
@@ -19,10 +36,10 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: ''
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -40,7 +57,8 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
             Rent {carName}
           </DialogTitle>
           <DialogDescription>
-            Please fill out the form below to rent the vehicle. All fields are required.
+            Please fill out the form below to rent the vehicle. All fields are
+            required.
           </DialogDescription>
         </DialogHeader>
 
@@ -50,7 +68,10 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
             <h3 className="text-lg font-semibold">Personal Information</h3>
             <div className="grid gap-4">
               <div className="relative">
-                <Label htmlFor="name" className="text-sm font-medium flex items-center gap-2 mb-1.5">
+                <Label
+                  htmlFor="name"
+                  className="text-sm font-medium flex items-center gap-2 mb-1.5"
+                >
                   <User className="h-4 w-4" />
                   Full Name
                 </Label>
@@ -60,14 +81,19 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
                     placeholder="John Doe"
                     required
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     className="w-full pl-4 text-left"
                   />
                 </div>
               </div>
 
               <div className="relative">
-                <Label htmlFor="email" className="text-sm font-medium flex items-center gap-2 mb-1.5">
+                <Label
+                  htmlFor="email"
+                  className="text-sm font-medium flex items-center gap-2 mb-1.5"
+                >
                   <Mail className="h-4 w-4" />
                   Email
                 </Label>
@@ -78,14 +104,19 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
                     placeholder="johndoe@example.com"
                     required
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     className="w-full pl-4 text-left"
                   />
                 </div>
               </div>
 
               <div className="relative">
-                <Label htmlFor="phone" className="text-sm font-medium flex items-center gap-2 mb-1.5">
+                <Label
+                  htmlFor="phone"
+                  className="text-sm font-medium flex items-center gap-2 mb-1.5"
+                >
                   <Phone className="h-4 w-4" />
                   Phone
                 </Label>
@@ -96,14 +127,19 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
                     placeholder="+48 573-206-149"
                     required
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
                     className="w-full pl-4 text-left"
                   />
                 </div>
               </div>
 
               <div className="relative">
-                <Label htmlFor="address" className="text-sm font-medium flex items-center gap-2 mb-1.5">
+                <Label
+                  htmlFor="address"
+                  className="text-sm font-medium flex items-center gap-2 mb-1.5"
+                >
                   <MapPin className="h-4 w-4" />
                   Address
                 </Label>
@@ -113,7 +149,9 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
                     placeholder="Your address"
                     required
                     value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, address: e.target.value })
+                    }
                     className="w-full pl-4 text-left"
                   />
                 </div>
@@ -175,9 +213,7 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
                       selected={endDate}
                       onSelect={setEndDate}
                       initialFocus
-                      disabled={(date) =>
-                        date < (startDate || new Date())
-                      }
+                      disabled={(date) => date < (startDate || new Date())}
                     />
                   </PopoverContent>
                 </Popover>
@@ -200,4 +236,4 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
   );
 };
 
-export default RentModal; 
+export default RentModal;
