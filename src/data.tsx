@@ -1,24 +1,34 @@
 // Import car images
-import volkswagenGolfR from './assets/cars/volkswagen-golf-r.jpg';
-import toyotaSupra from './assets/cars/toyota-supra-gr.jpeg';
-import subaruWrx from './assets/cars/subaru-wrx-sti.jpg';
-import porscheTaycan from './assets/cars/porsche-taycan-turbo-s.jpg';
-import porsche911 from './assets/cars/porsche-911.jpg';
-import mercedesAmgGt from './assets/cars/mercedes-amg-gt.avif';
-import nissanGtr from './assets/cars/nissan-gt-r-nismo.jpg';
-import mclaren720s from './assets/cars/mclaren-720s.webp';
-import mazdaMx5 from './assets/cars/mazda-mx5-miata.avif';
-import lamborghiniHuracan from './assets/cars/lamborghini-huracan-evo.jpg';
-import jaguarFType from './assets/cars/jaguar-f-type-r.jpg';
-import fordMustang from './assets/cars/ford-mustang-gt500.avif';
-import chevroletCorvette from './assets/cars/chevrolet-corvette-c8.jpg';
-import ferrariF8 from './assets/cars/ferrari-f8-tributo.jpeg';
-import bugattiChiron from './assets/cars/bugatti-chiron.jpg';
-import bmwM8 from './assets/cars/bmw-m8.jpg';
-import bmwM4 from './assets/cars/bmw-m4.jpg';
-import astonMartin from './assets/cars/aston-martin-vantage.webp';
-import audiR8 from './assets/cars/audi-r8-v10.webp';
-import audiRs7 from './assets/cars/audi-rs7.webp';
+import volkswagenGolfR from "./assets/cars/volkswagen-golf-r.jpg";
+import toyotaSupra from "./assets/cars/toyota-supra-gr.jpeg";
+import subaruWrx from "./assets/cars/subaru-wrx-sti.jpg";
+import porscheTaycan from "./assets/cars/porsche-taycan-turbo-s.jpg";
+import porsche911 from "./assets/cars/porsche-911.jpg";
+import mercedesAmgGt from "./assets/cars/mercedes-amg-gt.avif";
+import nissanGtr from "./assets/cars/nissan-gt-r-nismo.jpg";
+import mclaren720s from "./assets/cars/mclaren-720s.webp";
+import mazdaMx5 from "./assets/cars/mazda-mx5-miata.avif";
+import lamborghiniHuracan from "./assets/cars/lamborghini-huracan-evo.jpg";
+import jaguarFType from "./assets/cars/jaguar-f-type-r.jpg";
+import fordMustang from "./assets/cars/ford-mustang-gt500.avif";
+import chevroletCorvette from "./assets/cars/chevrolet-corvette-c8.jpg";
+import ferrariF8 from "./assets/cars/ferrari-f8-tributo.jpeg";
+import bugattiChiron from "./assets/cars/bugatti-chiron.jpg";
+import bmwM8 from "./assets/cars/bmw-m8.jpg";
+import bmwM4 from "./assets/cars/bmw-m4.jpg";
+import astonMartin from "./assets/cars/aston-martin-vantage.webp";
+import audiR8 from "./assets/cars/audi-r8-v10.webp";
+import audiRs7 from "./assets/cars/audi-rs7.webp";
+
+export interface UserData {
+  name: string;
+  code: number;
+}
+
+export const User: UserData = {
+  name: "jjs",
+  code: 1111,
+};
 
 // Types
 export interface CarSpec {
@@ -27,7 +37,7 @@ export interface CarSpec {
   acceleration: number;
   fuelType: string;
   seating: number;
-  price: string;
+  price: number;
   description: string;
 }
 
@@ -40,7 +50,7 @@ export interface Car {
   specs: CarSpec;
 }
 
-export type SortType = 'price' | 'power' | 'none';
+export type SortType = "price" | "power" | "none";
 
 // Data
 export const allCars: Car[] = [
@@ -56,9 +66,10 @@ export const allCars: Car[] = [
       acceleration: 2.4,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 3500",
-      description: "The Bugatti Chiron is the ultimate hypercar, combining unmatched performance with luxury..."
-    }
+      price: 3500,
+      description:
+        "The Bugatti Chiron is the ultimate hypercar, combining unmatched performance with luxury...",
+    },
   },
   {
     id: 2,
@@ -72,9 +83,10 @@ export const allCars: Car[] = [
       acceleration: 2.8,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 2500",
-      description: "The McLaren 720S delivers breathtaking performance and cutting-edge technology..."
-    }
+      price: 2500,
+      description:
+        "The McLaren 720S delivers breathtaking performance and cutting-edge technology...",
+    },
   },
   {
     id: 3,
@@ -88,9 +100,10 @@ export const allCars: Car[] = [
       acceleration: 2.9,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 2800",
-      description: "The Ferrari F8 Tributo represents the highest expression of Ferrari's classic two-seater berlinetta..."
-    }
+      price: 2800,
+      description:
+        "The Ferrari F8 Tributo represents the highest expression of Ferrari's classic two-seater berlinetta...",
+    },
   },
   {
     id: 4,
@@ -104,9 +117,10 @@ export const allCars: Car[] = [
       acceleration: 2.9,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 2600",
-      description: "The Lamborghini Huracan EVO is the evolution of the most successful V10-powered Lamborghini ever..."
-    }
+      price: 2600,
+      description:
+        "The Lamborghini Huracan EVO is the evolution of the most successful V10-powered Lamborghini ever...",
+    },
   },
   {
     id: 5,
@@ -120,9 +134,10 @@ export const allCars: Car[] = [
       acceleration: 2.8,
       fuelType: "Electric",
       seating: 4,
-      price: "PLN 750",
-      description: "The Porsche Taycan Turbo S represents the pinnacle of electric performance..."
-    }
+      price: 750,
+      description:
+        "The Porsche Taycan Turbo S represents the pinnacle of electric performance...",
+    },
   },
   {
     id: 6,
@@ -136,9 +151,10 @@ export const allCars: Car[] = [
       acceleration: 4.6,
       fuelType: "Premium Gasoline",
       seating: 5,
-      price: "PLN 450",
-      description: "The Subaru WRX STI delivers rally-bred performance with all-wheel drive capability..."
-    }
+      price: 450,
+      description:
+        "The Subaru WRX STI delivers rally-bred performance with all-wheel drive capability...",
+    },
   },
   {
     id: 7,
@@ -152,9 +168,10 @@ export const allCars: Car[] = [
       acceleration: 3.9,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 380",
-      description: "The Toyota Supra GR continues the legacy of Toyota's iconic sports car..."
-    }
+      price: 380,
+      description:
+        "The Toyota Supra GR continues the legacy of Toyota's iconic sports car...",
+    },
   },
   {
     id: 8,
@@ -168,9 +185,10 @@ export const allCars: Car[] = [
       acceleration: 4.8,
       fuelType: "Premium Gasoline",
       seating: 5,
-      price: "PLN 350",
-      description: "The Volkswagen Golf R is a hot hatchback that delivers performance and fun..."
-    }
+      price: 350,
+      description:
+        "The Volkswagen Golf R is a hot hatchback that delivers performance and fun...",
+    },
   },
   {
     id: 9,
@@ -184,9 +202,10 @@ export const allCars: Car[] = [
       acceleration: 2.7,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 1200",
-      description: "The Nissan GTR Nismo is a track-focused version of the Nissan GTR..."
-    }
+      price: 1200,
+      description:
+        "The Nissan GTR Nismo is a track-focused version of the Nissan GTR...",
+    },
   },
   {
     id: 10,
@@ -200,9 +219,10 @@ export const allCars: Car[] = [
       acceleration: 2.8,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 2500",
-      description: "The McLaren 720S delivers breathtaking performance and cutting-edge technology..."
-    }
+      price: 2500,
+      description:
+        "The McLaren 720S delivers breathtaking performance and cutting-edge technology...",
+    },
   },
   {
     id: 11,
@@ -216,9 +236,10 @@ export const allCars: Car[] = [
       acceleration: 7.3,
       fuelType: "Regular Gasoline",
       seating: 2,
-      price: "PLN 300",
-      description: "The Mazda MX5 Miata is a lightweight, rear-wheel drive sports car that's fun to drive..."
-    }
+      price: 300,
+      description:
+        "The Mazda MX5 Miata is a lightweight, rear-wheel drive sports car that's fun to drive...",
+    },
   },
   {
     id: 12,
@@ -232,9 +253,10 @@ export const allCars: Car[] = [
       acceleration: 4.5,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 700",
-      description: "The Jaguar F-Type R is a luxury sports car that combines performance and style..."
-    }
+      price: 700,
+      description:
+        "The Jaguar F-Type R is a luxury sports car that combines performance and style...",
+    },
   },
   {
     id: 13,
@@ -248,9 +270,10 @@ export const allCars: Car[] = [
       acceleration: 4.0,
       fuelType: "Regular Gasoline",
       seating: 2,
-      price: "PLN 1000",
-      description: "The Ford Mustang GT500 is a high-performance muscle car that delivers raw power..."
-    }
+      price: 1000,
+      description:
+        "The Ford Mustang GT500 is a high-performance muscle car that delivers raw power...",
+    },
   },
   {
     id: 14,
@@ -264,9 +287,10 @@ export const allCars: Car[] = [
       acceleration: 3.0,
       fuelType: "Regular Gasoline",
       seating: 2,
-      price: "PLN 800",
-      description: "The Chevrolet Corvette C8 is a mid-engine sports car that's known for its exceptional handling..."
-    }
+      price: 800,
+      description:
+        "The Chevrolet Corvette C8 is a mid-engine sports car that's known for its exceptional handling...",
+    },
   },
   {
     id: 15,
@@ -280,9 +304,10 @@ export const allCars: Car[] = [
       acceleration: 3.6,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 1500",
-      description: "The Aston Martin Vantage is a luxury sports car that combines performance and style..."
-    }
+      price: 1500,
+      description:
+        "The Aston Martin Vantage is a luxury sports car that combines performance and style...",
+    },
   },
   {
     id: 16,
@@ -296,9 +321,10 @@ export const allCars: Car[] = [
       acceleration: 3.1,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 1800",
-      description: "The Audi R8 V10 is a high-performance sports car that delivers exceptional performance..."
-    }
+      price: 1800,
+      description:
+        "The Audi R8 V10 is a high-performance sports car that delivers exceptional performance...",
+    },
   },
   {
     id: 17,
@@ -312,9 +338,10 @@ export const allCars: Car[] = [
       acceleration: 3.5,
       fuelType: "Premium Gasoline",
       seating: 5,
-      price: "PLN 599",
-      description: "The Audi RS7 combines luxury and performance in a stunning package..."
-    }
+      price: 599,
+      description:
+        "The Audi RS7 combines luxury and performance in a stunning package...",
+    },
   },
   {
     id: 18,
@@ -328,9 +355,10 @@ export const allCars: Car[] = [
       acceleration: 3.2,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 2000",
-      description: "The BMW M8 is a high-performance luxury sedan that delivers exceptional performance..."
-    }
+      price: 2000,
+      description:
+        "The BMW M8 is a high-performance luxury sedan that delivers exceptional performance...",
+    },
   },
   {
     id: 19,
@@ -344,9 +372,9 @@ export const allCars: Car[] = [
       acceleration: 3.4,
       fuelType: "Premium Gasoline",
       seating: 4,
-      price: "PLN 299",
-      description: "The BMW M4 Competition delivers track-ready performance..."
-    }
+      price: 299,
+      description: "The BMW M4 Competition delivers track-ready performance...",
+    },
   },
   {
     id: 20,
@@ -360,12 +388,13 @@ export const allCars: Car[] = [
       acceleration: 3.8,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 1000",
-      description: "The Porsche 911 is a classic sports car that's known for its exceptional handling..."
-    }
+      price: 1000,
+      description:
+        "The Porsche 911 is a classic sports car that's known for its exceptional handling...",
+    },
   },
   {
-    id: 7,
+    id: 21,
     name: "Lamborghini Huracan EVO",
     imageUrl: lamborghiniHuracan,
     year: 2023,
@@ -376,12 +405,13 @@ export const allCars: Car[] = [
       acceleration: 2.9,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 2600",
-      description: "The Lamborghini Huracan EVO represents the perfect fusion of technology and design, with aerodynamic solutions oriented towards maximum performance."
-    }
+      price: 2600,
+      description:
+        "The Lamborghini Huracan EVO represents the perfect fusion of technology and design, with aerodynamic solutions oriented towards maximum performance.",
+    },
   },
   {
-    id: 8,
+    id: 22,
     name: "Aston Martin Vantage",
     imageUrl: astonMartin,
     year: 2023,
@@ -392,12 +422,13 @@ export const allCars: Car[] = [
       acceleration: 3.5,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 1800",
-      description: "The Aston Martin Vantage combines beautiful design with agile performance and dedicated craftsmanship."
-    }
+      price: 1800,
+      description:
+        "The Aston Martin Vantage combines beautiful design with agile performance and dedicated craftsmanship.",
+    },
   },
   {
-    id: 9,
+    id: 23,
     name: "Audi R8 V10",
     imageUrl: audiR8,
     year: 2023,
@@ -408,12 +439,13 @@ export const allCars: Car[] = [
       acceleration: 3.1,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 2200",
-      description: "The Audi R8 V10 delivers breathtaking performance with its naturally aspirated V10 engine and quattro all-wheel drive."
-    }
+      price: 2200,
+      description:
+        "The Audi R8 V10 delivers breathtaking performance with its naturally aspirated V10 engine and quattro all-wheel drive.",
+    },
   },
   {
-    id: 10,
+    id: 24,
     name: "BMW M8",
     imageUrl: bmwM8,
     year: 2023,
@@ -424,12 +456,13 @@ export const allCars: Car[] = [
       acceleration: 3.0,
       fuelType: "Premium Gasoline",
       seating: 4,
-      price: "PLN 1500",
-      description: "The BMW M8 combines luxury grand touring with M division performance capabilities."
-    }
+      price: 1500,
+      description:
+        "The BMW M8 combines luxury grand touring with M division performance capabilities.",
+    },
   },
   {
-    id: 11,
+    id: 25,
     name: "Chevrolet Corvette C8",
     imageUrl: chevroletCorvette,
     year: 2023,
@@ -440,12 +473,13 @@ export const allCars: Car[] = [
       acceleration: 2.9,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 1200",
-      description: "The mid-engine Chevrolet Corvette C8 redefines American sports car performance."
-    }
+      price: 1200,
+      description:
+        "The mid-engine Chevrolet Corvette C8 redefines American sports car performance.",
+    },
   },
   {
-    id: 12,
+    id: 26,
     name: "Ford Mustang GT500",
     imageUrl: fordMustang,
     year: 2023,
@@ -456,12 +490,13 @@ export const allCars: Car[] = [
       acceleration: 3.3,
       fuelType: "Premium Gasoline",
       seating: 4,
-      price: "PLN 950",
-      description: "The most powerful street-legal Ford ever, the Mustang GT500 combines raw power with precision handling."
-    }
+      price: 950,
+      description:
+        "The most powerful street-legal Ford ever, the Mustang GT500 combines raw power with precision handling.",
+    },
   },
   {
-    id: 13,
+    id: 27,
     name: "Jaguar F-Type R",
     imageUrl: jaguarFType,
     year: 2023,
@@ -472,12 +507,13 @@ export const allCars: Car[] = [
       acceleration: 3.5,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 1300",
-      description: "The Jaguar F-Type R combines British luxury with explosive performance and stunning design."
-    }
+      price: 1300,
+      description:
+        "The Jaguar F-Type R combines British luxury with explosive performance and stunning design.",
+    },
   },
   {
-    id: 14,
+    id: 28,
     name: "Mazda MX-5 Miata",
     imageUrl: mazdaMx5,
     year: 2023,
@@ -488,12 +524,13 @@ export const allCars: Car[] = [
       acceleration: 5.7,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 250",
-      description: "The Mazda MX-5 Miata continues to deliver pure driving pleasure with its perfect balance and lightweight design."
-    }
+      price: 250,
+      description:
+        "The Mazda MX-5 Miata continues to deliver pure driving pleasure with its perfect balance and lightweight design.",
+    },
   },
   {
-    id: 15,
+    id: 29,
     name: "Nissan GT-R Nismo",
     imageUrl: nissanGtr,
     year: 2023,
@@ -504,12 +541,13 @@ export const allCars: Car[] = [
       acceleration: 2.8,
       fuelType: "Premium Gasoline",
       seating: 4,
-      price: "PLN 1800",
-      description: "The Nissan GT-R NISMO represents the ultimate expression of Nissan's performance engineering."
-    }
+      price: 1800,
+      description:
+        "The Nissan GT-R NISMO represents the ultimate expression of Nissan's performance engineering.",
+    },
   },
   {
-    id: 16,
+    id: 30,
     name: "Porsche 911",
     imageUrl: porsche911,
     year: 2023,
@@ -520,12 +558,13 @@ export const allCars: Car[] = [
       acceleration: 3.4,
       fuelType: "Premium Gasoline",
       seating: 4,
-      price: "PLN 1600",
-      description: "The Porsche 911 continues to set the standard for sports car excellence and everyday usability."
-    }
+      price: 1600,
+      description:
+        "The Porsche 911 continues to set the standard for sports car excellence and everyday usability.",
+    },
   },
   {
-    id: 17,
+    id: 31,
     name: "Mercedes-AMG GT",
     imageUrl: mercedesAmgGt,
     year: 2023,
@@ -536,12 +575,13 @@ export const allCars: Car[] = [
       acceleration: 3.7,
       fuelType: "Premium Gasoline",
       seating: 2,
-      price: "PLN 1900",
-      description: "The Mercedes-AMG GT combines stunning design with breathtaking performance and luxury."
-    }
+      price: 1900,
+      description:
+        "The Mercedes-AMG GT combines stunning design with breathtaking performance and luxury.",
+    },
   },
   {
-    id: 18,
+    id: 32,
     name: "Volkswagen Golf R",
     imageUrl: volkswagenGolfR,
     year: 2023,
@@ -552,12 +592,13 @@ export const allCars: Car[] = [
       acceleration: 4.7,
       fuelType: "Premium Gasoline",
       seating: 5,
-      price: "PLN 350",
-      description: "The Volkswagen Golf R delivers exceptional performance in a practical hot hatch package."
-    }
+      price: 350,
+      description:
+        "The Volkswagen Golf R delivers exceptional performance in a practical hot hatch package.",
+    },
   },
   {
-    id: 19,
+    id: 33,
     name: "BMW M4 Competition",
     imageUrl: bmwM4,
     year: 2023,
@@ -568,12 +609,13 @@ export const allCars: Car[] = [
       acceleration: 3.4,
       fuelType: "Premium Gasoline",
       seating: 4,
-      price: "PLN 1100",
-      description: "The BMW M4 Competition delivers track-ready performance with everyday usability."
-    }
+      price: 1100,
+      description:
+        "The BMW M4 Competition delivers track-ready performance with everyday usability.",
+    },
   },
   {
-    id: 20,
+    id: 34,
     name: "Audi RS7",
     imageUrl: audiRs7,
     year: 2023,
@@ -584,33 +626,36 @@ export const allCars: Car[] = [
       acceleration: 3.5,
       fuelType: "Premium Gasoline",
       seating: 5,
-      price: "PLN 1400",
-      description: "The Audi RS7 combines stunning design with incredible performance in a practical fastback package."
-    }
-  }
+      price: 1400,
+      description:
+        "The Audi RS7 combines stunning design with incredible performance in a practical fastback package.",
+    },
+  },
 ];
 
-// Helper functions
-export const filterLuxuryCars = (cars: Car[]): Car[] => {
-  return cars.filter(car => parseInt(car.specs.price.replace('PLN ', '')) > 500);
-};
+// // Helper functions
+// export const filterLuxuryCars = (cars: Car[]): Car[] => {
+//   return cars.filter(
+//     (car) => parseInt(car.specs.price.replace("PLN ", "")) > 500
+//   );
+// };
 
-export const filterManualCars = (cars: Car[]): Car[] => {
-  return cars.filter(car => car.transmission === "Manual");
-};
+// export const filterManualCars = (cars: Car[]): Car[] => {
+//   return cars.filter((car) => car.transmission === "Manual");
+// };
 
-export const filterFastCars = (cars: Car[]): Car[] => {
-  return cars.filter(car => car.specs.acceleration < 3.5);
-};
+// export const filterFastCars = (cars: Car[]): Car[] => {
+//   return cars.filter((car) => car.specs.acceleration < 3.5);
+// };
 
-export const sortByPrice = (cars: Car[]): Car[] => {
-  return [...cars].sort((a, b) => {
-    const priceA = parseInt(a.specs.price.replace('PLN ', ''));
-    const priceB = parseInt(b.specs.price.replace('PLN ', ''));
-    return priceA - priceB;
-  });
-};
+// export const sortByPrice = (cars: Car[]): Car[] => {
+//   return [...cars].sort((a, b) => {
+//     const priceA = parseInt(a.specs.price.replace("PLN ", ""));
+//     const priceB = parseInt(b.specs.price.replace("PLN ", ""));
+//     return priceA - priceB;
+//   });
+// };
 
-export const sortByPower = (cars: Car[]): Car[] => {
-  return [...cars].sort((a, b) => b.specs.power - a.specs.power);
-};
+// export const sortByPower = (cars: Car[]): Car[] => {
+//   return [...cars].sort((a, b) => b.specs.power - a.specs.power);
+// };
