@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import RentModal from "@/components/RentModal";
-import { Car } from '@/data';
+import { Car } from "@/data";
 
 interface CarouselProps {
   cars: Car[];
@@ -16,26 +16,28 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
   const [selectedCar] = useState<Car | null>(null);
 
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? 5 : prevIndex - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 2 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) => (prevIndex === 5 ? 0 : prevIndex + 1));
   };
 
-
   // only show 3 cars
-  const displayedCars = cars.slice(0, 3);
+
+  // Add recommended in car data, if true they get displayed, if no they don't.
+  // Able to be changed from Admin pannel if car is recommended or not. (easier to do than slicing it ( not available from admin (would have to be switched to props)))
+  const displayedCars = cars.slice(0, 6);
 
   return (
     <>
       <div className="relative w-full overflow-hidden rounded-lg border border-border shadow-lg">
-        <div 
+        <div
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {displayedCars.map((car) => (
-            <div 
+            <div
               key={car.id}
               className="w-full flex-shrink-0 cursor-pointer"
               onClick={() => onCarSelect(car)}
@@ -47,7 +49,7 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-                
+
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
                   <h3 className="text-2xl md:text-3xl font-bold drop-shadow-lg">
@@ -57,7 +59,7 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
                     <p className="text-lg opacity-90 drop-shadow-lg">
                       {car.specs.price}/day
                     </p>
-                    <Button 
+                    <Button
                       className="bg-black/40 hover:bg-black/60 text-white backdrop-blur-sm"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -94,7 +96,7 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-white' : 'bg-white/50'
+                index === currentIndex ? "bg-white" : "bg-white/50"
               }`}
             />
           ))}
@@ -113,4 +115,4 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
   );
 };
 
-export default Carousel; 
+export default Carousel;
