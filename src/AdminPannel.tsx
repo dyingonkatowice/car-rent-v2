@@ -1,5 +1,13 @@
-//TEST
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "./componentsAdmin/app-sidebar";
 
 export default function AdminPannel() {
-  return <div>AdminPannel</div>;
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+      </main>
+    </SidebarProvider>
+  );
 }
