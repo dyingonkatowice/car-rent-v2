@@ -23,11 +23,13 @@ import audiRs7 from "./assets/cars/audi-rs7.webp";
 export interface UserData {
   name: string;
   code: number;
+  tries: number;
 }
 
 export const User: UserData = {
-  name: "jjs",
+  name: "test",
   code: 1111,
+  tries: 5,
 };
 
 // Types
