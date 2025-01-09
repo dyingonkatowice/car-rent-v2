@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import RentModal from './RentModal';
-import CarDetailsModal from './CarDetailsModal';
-import { Button } from './ui/button';
-import { Car as Fuel, Users } from 'lucide-react';
-import { Car } from '@/data';
+import { useState } from "react";
+import RentModal from "./RentModal";
+import CarDetailsModal from "./CarDetailsModal";
+import { Button } from "./ui/button";
+import { Car as Fuel, Users } from "lucide-react";
+import { Car } from "@/data";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface CarCardProps {
   car: Car;
@@ -16,12 +17,12 @@ const CarCard = ({ car, onSelect }: CarCardProps) => {
 
   return (
     <>
-      <div 
+      <div
         className="group relative bg-card rounded-lg border border-border shadow-sm hover:shadow-lg transition-all overflow-hidden cursor-pointer"
         onClick={() => onSelect()}
       >
         <div className="aspect-[16/9] overflow-hidden">
-          <img
+          <LazyLoadImage
             src={car.imageUrl}
             alt={car.name}
             className="w-full h-full object-cover transition-transform group-hover:scale-105"
@@ -32,10 +33,13 @@ const CarCard = ({ car, onSelect }: CarCardProps) => {
           <div className="flex items-start justify-between">
             <div>
               <h3 className="font-semibold text-lg">{car.name}</h3>
-              <p className="text-sm text-muted-foreground">{car.year} · {car.transmission}</p>
+              <p className="text-sm text-muted-foreground">
+                {car.year} · {car.transmission}
+              </p>
             </div>
             <p className="font-bold text-right">
-              {car.specs.price}<span className="text-sm font-normal">/day</span>
+              {car.specs.price}
+              <span className="text-sm font-normal">/day</span>
             </p>
           </div>
 
@@ -83,7 +87,7 @@ const CarCard = ({ car, onSelect }: CarCardProps) => {
           year: car.year,
           transmission: car.transmission,
           imageUrl: car.imageUrl,
-          specs: car.specs
+          specs: car.specs,
         }}
       />
 
@@ -96,4 +100,4 @@ const CarCard = ({ car, onSelect }: CarCardProps) => {
   );
 };
 
-export default CarCard; 
+export default CarCard;

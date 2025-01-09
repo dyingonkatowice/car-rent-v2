@@ -11,6 +11,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { debounce } from "lodash";
 import { Car, allCars } from "@/data";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface SearchBoxProps {
   cars: Car[];
@@ -438,7 +439,7 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
                       }}
                     >
                       <div className="aspect-[16/9] relative">
-                        <img
+                        <LazyLoadImage
                           src={car.imageUrl}
                           alt={car.name}
                           className="w-full h-full object-cover"

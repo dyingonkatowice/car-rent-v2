@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import RentModal from "@/components/RentModal";
 import { Car } from "@/data";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface CarouselProps {
   cars: Car[];
@@ -25,9 +26,9 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
 
   // only show 3 cars
 
-  // Add recommended in car data, if true they get displayed, if no they don't.
-  // Able to be changed from Admin pannel if car is recommended or not. (easier to do than slicing it ( not available from admin (would have to be switched to props)))
-  const displayedCars = cars.slice(0, 6);
+  //Cars in carousell displayed based of if recommended or not
+
+  const displayedCars = cars.filter((e) => e.specs.recomended === true);
 
   return (
     <>
@@ -43,7 +44,7 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
               onClick={() => onCarSelect(car)}
             >
               <div className="relative aspect-[16/9] md:aspect-[21/9]">
-                <img
+                <LazyLoadImage
                   src={car.imageUrl}
                   alt={car.name}
                   className="w-full h-full object-cover"

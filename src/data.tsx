@@ -21,12 +21,14 @@ import audiR8 from "./assets/cars/audi-r8-v10.webp";
 import audiRs7 from "./assets/cars/audi-rs7.webp";
 
 export interface UserData {
+  fullName: string;
   name: string;
   code: number;
   tries: number;
 }
 
 export const User: UserData = {
+  fullName: "John Smith",
   name: "test",
   code: 1111,
   tries: 5,
@@ -41,6 +43,7 @@ export interface CarSpec {
   seating: number;
   price: number;
   description: string;
+  recomended: boolean;
 }
 
 export interface Car {
@@ -48,6 +51,7 @@ export interface Car {
   name: string;
   imageUrl: string;
   year: number;
+
   transmission: string;
   specs: CarSpec;
 }
@@ -66,6 +70,7 @@ export const allCars: Car[] = [
       engine: "8.0L W16 Quad-Turbo",
       power: 1500,
       acceleration: 2.4,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 3500,
@@ -83,6 +88,7 @@ export const allCars: Car[] = [
       engine: "4.0L V8 Twin-Turbo",
       power: 710,
       acceleration: 2.8,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 2500,
@@ -100,6 +106,7 @@ export const allCars: Car[] = [
       engine: "3.9L V8 Twin-Turbo",
       power: 710,
       acceleration: 2.9,
+      recomended: true,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 2800,
@@ -117,6 +124,7 @@ export const allCars: Car[] = [
       engine: "5.2L V10",
       power: 640,
       acceleration: 2.9,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 2600,
@@ -134,6 +142,7 @@ export const allCars: Car[] = [
       engine: "Electric",
       power: 750,
       acceleration: 2.8,
+      recomended: false,
       fuelType: "Electric",
       seating: 4,
       price: 750,
@@ -151,6 +160,7 @@ export const allCars: Car[] = [
       engine: "2.5L Turbocharged Boxer-4",
       power: 310,
       acceleration: 4.6,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 5,
       price: 450,
@@ -168,6 +178,7 @@ export const allCars: Car[] = [
       engine: "3.0L Turbocharged I6",
       power: 382,
       acceleration: 3.9,
+      recomended: true,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 380,
@@ -185,6 +196,7 @@ export const allCars: Car[] = [
       engine: "2.0L Turbocharged I4",
       power: 315,
       acceleration: 4.8,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 5,
       price: 350,
@@ -202,6 +214,7 @@ export const allCars: Car[] = [
       engine: "3.8L Twin-Turbo I6",
       power: 600,
       acceleration: 2.7,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 1200,
@@ -219,6 +232,7 @@ export const allCars: Car[] = [
       engine: "4.0L V8 Twin-Turbo",
       power: 710,
       acceleration: 2.8,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 2500,
@@ -236,6 +250,7 @@ export const allCars: Car[] = [
       engine: "1.5L NA I4",
       power: 181,
       acceleration: 7.3,
+      recomended: false,
       fuelType: "Regular Gasoline",
       seating: 2,
       price: 300,
@@ -253,6 +268,7 @@ export const allCars: Car[] = [
       engine: "3.0L Turbocharged I4",
       power: 400,
       acceleration: 4.5,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 700,
@@ -270,6 +286,7 @@ export const allCars: Car[] = [
       engine: "5.0L Supercharged V8",
       power: 760,
       acceleration: 4.0,
+      recomended: false,
       fuelType: "Regular Gasoline",
       seating: 2,
       price: 1000,
@@ -287,6 +304,7 @@ export const allCars: Car[] = [
       engine: "6.2L LT2 V8",
       power: 495,
       acceleration: 3.0,
+      recomended: false,
       fuelType: "Regular Gasoline",
       seating: 2,
       price: 800,
@@ -304,6 +322,7 @@ export const allCars: Car[] = [
       engine: "4.0L Twin-Turbo V8",
       power: 503,
       acceleration: 3.6,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 1500,
@@ -321,6 +340,7 @@ export const allCars: Car[] = [
       engine: "5.2L V10",
       power: 610,
       acceleration: 3.1,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 1800,
@@ -338,6 +358,7 @@ export const allCars: Car[] = [
       engine: "4.0L V8 TFSI",
       power: 591,
       acceleration: 3.5,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 5,
       price: 599,
@@ -355,6 +376,7 @@ export const allCars: Car[] = [
       engine: "4.4L Twin-Turbo V8",
       power: 625,
       acceleration: 3.2,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 2000,
@@ -372,6 +394,7 @@ export const allCars: Car[] = [
       engine: "3.0L Twin-Turbo I6",
       power: 503,
       acceleration: 3.4,
+      recomended: true,
       fuelType: "Premium Gasoline",
       seating: 4,
       price: 299,
@@ -388,6 +411,7 @@ export const allCars: Car[] = [
       engine: "3.0L Turbocharged I6",
       power: 443,
       acceleration: 3.8,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 1000,
@@ -405,6 +429,7 @@ export const allCars: Car[] = [
       engine: "5.2L V10",
       power: 640,
       acceleration: 2.9,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 2600,
@@ -422,6 +447,7 @@ export const allCars: Car[] = [
       engine: "4.0L V8 Twin-Turbo",
       power: 503,
       acceleration: 3.5,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 1800,
@@ -439,6 +465,7 @@ export const allCars: Car[] = [
       engine: "5.2L V10",
       power: 602,
       acceleration: 3.1,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 2200,
@@ -456,6 +483,7 @@ export const allCars: Car[] = [
       engine: "4.4L V8 Twin-Turbo",
       power: 617,
       acceleration: 3.0,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 4,
       price: 1500,
@@ -473,6 +501,7 @@ export const allCars: Car[] = [
       engine: "6.2L V8",
       power: 495,
       acceleration: 2.9,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 1200,
@@ -490,6 +519,7 @@ export const allCars: Car[] = [
       engine: "5.2L Supercharged V8",
       power: 760,
       acceleration: 3.3,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 4,
       price: 950,
@@ -507,6 +537,7 @@ export const allCars: Car[] = [
       engine: "5.0L Supercharged V8",
       power: 575,
       acceleration: 3.5,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 1300,
@@ -524,6 +555,7 @@ export const allCars: Car[] = [
       engine: "2.0L I4",
       power: 181,
       acceleration: 5.7,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 250,
@@ -541,6 +573,7 @@ export const allCars: Car[] = [
       engine: "3.8L V6 Twin-Turbo",
       power: 600,
       acceleration: 2.8,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 4,
       price: 1800,
@@ -558,6 +591,7 @@ export const allCars: Car[] = [
       engine: "3.0L Twin-Turbo Flat-6",
       power: 443,
       acceleration: 3.4,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 4,
       price: 1600,
@@ -575,6 +609,7 @@ export const allCars: Car[] = [
       engine: "4.0L V8 Biturbo",
       power: 523,
       acceleration: 3.7,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 1900,
@@ -592,6 +627,7 @@ export const allCars: Car[] = [
       engine: "2.0L Turbocharged I4",
       power: 315,
       acceleration: 4.7,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 5,
       price: 350,
@@ -609,6 +645,7 @@ export const allCars: Car[] = [
       engine: "3.0L Twin-Turbo I6",
       power: 503,
       acceleration: 3.4,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 4,
       price: 1100,
@@ -626,6 +663,7 @@ export const allCars: Car[] = [
       engine: "4.0L V8 Twin-Turbo",
       power: 591,
       acceleration: 3.5,
+      recomended: false,
       fuelType: "Premium Gasoline",
       seating: 5,
       price: 1400,
@@ -647,7 +685,7 @@ export const allCars: Car[] = [
 // };
 
 // export const filterFastCars = (cars: Car[]): Car[] => {
-//   return cars.filter((car) => car.specs.acceleration < 3.5);
+//   return cars.filter((car) => car.specs.acceleration < 3.5
 // };
 
 // export const sortByPrice = (cars: Car[]): Car[] => {

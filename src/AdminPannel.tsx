@@ -1,13 +1,18 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "./componentsAdmin/app-sidebar";
-
-export default function AdminPannel() {
+type AdminPannelProps = {
+  userName: string;
+  logOut: () => void;
+};
+export default function AdminPannel({ userName, logOut }: AdminPannelProps) {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <main>
-        <SidebarTrigger />
-      </main>
-    </SidebarProvider>
+    <>
+      <SidebarProvider>
+        <AppSidebar userName={userName} logOut={logOut} />
+        <main>
+          <div className="h-screen flex items-center justify-center">hi</div>
+        </main>
+      </SidebarProvider>
+    </>
   );
 }

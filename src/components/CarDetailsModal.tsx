@@ -1,9 +1,15 @@
-import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Fuel, Gauge, Power, Users, DollarSign, Cog } from "lucide-react";
 import RentModal from "@/components/RentModal";
-import { Car } from '@/data';
+import { Car } from "@/data";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface CarDetailsModalProps {
   isOpen: boolean;
@@ -18,14 +24,16 @@ const CarDetailsModal = ({ isOpen, onClose, car }: CarDetailsModalProps) => {
     <Dialog open={isOpen} onOpenChange={() => onClose()}>
       <DialogContent className="w-full h-[100dvh] md:h-auto md:max-w-[600px] p-0 overflow-y-auto">
         <div className="relative h-[200px] md:h-[300px] w-full">
-          <img
+          <LazyLoadImage
             src={car.imageUrl}
             alt={car.name}
             className="w-full h-full object-cover"
           />
           <DialogHeader className="absolute bottom-0 left-0 right-0 p-6 text-white">
             <DialogTitle className="text-3xl font-bold">{car.name}</DialogTitle>
-            <p className="text-lg opacity-90">{car.year} · {car.transmission}</p>
+            <p className="text-lg opacity-90">
+              {car.year} · {car.transmission}
+            </p>
           </DialogHeader>
         </div>
 
@@ -113,14 +121,14 @@ const CarDetailsModal = ({ isOpen, onClose, car }: CarDetailsModalProps) => {
           </div>
 
           <div className="flex flex-col md:flex-row gap-3 pt-4 border-t mt-4">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={onClose}
               className="w-full md:w-auto"
             >
               Close
             </Button>
-            <Button 
+            <Button
               onClick={() => setShowRentModal(true)}
               className="w-full md:w-auto gap-2"
             >
@@ -139,4 +147,4 @@ const CarDetailsModal = ({ isOpen, onClose, car }: CarDetailsModalProps) => {
   );
 };
 
-export default CarDetailsModal; 
+export default CarDetailsModal;

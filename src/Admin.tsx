@@ -24,6 +24,9 @@ export default function Admin() {
   const [code, setCode] = useState("");
   const [timers, setTimer] = useState<number>(5);
 
+  const logOutFunction = () => {
+    setIsLogged(!isLogged);
+  };
   const getData = () => {
     // Check if login and code match the User data
     if (User.tries > 0) {
@@ -119,7 +122,7 @@ export default function Admin() {
           </div>
         </>
       ) : (
-        <AdminPannel />
+        <AdminPannel userName={User.fullName} logOut={logOutFunction} />
       )}
     </>
   );
