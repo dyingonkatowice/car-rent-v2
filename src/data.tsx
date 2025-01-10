@@ -70,7 +70,7 @@ export const allCars: Car[] = [
       engine: "8.0L W16 Quad-Turbo",
       power: 1500,
       acceleration: 2.4,
-      recomended: false,
+      recomended: true,
       fuelType: "Premium Gasoline",
       seating: 2,
       price: 3500,

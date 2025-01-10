@@ -17,11 +17,15 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
   const [selectedCar] = useState<Car | null>(null);
 
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? 5 : prevIndex - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? displayedCars.length - 1 : prevIndex - 1
+    );
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 5 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === displayedCars.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
   // only show 3 cars
@@ -29,6 +33,7 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
   //Cars in carousell displayed based of if recommended or not
 
   const displayedCars = cars.filter((e) => e.specs.recomended === true);
+  console.log(displayedCars);
 
   return (
     <>
