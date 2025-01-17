@@ -199,7 +199,7 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
           }}
         >
           <Search className="h-4 w-4" />
-          Advanced Search
+          <p className="hidden md:block">Advanced Search</p>
           {showAdvanced ? (
             <ChevronUp className="h-4 w-4" />
           ) : (

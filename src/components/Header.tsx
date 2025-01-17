@@ -13,22 +13,24 @@ const Header: React.FC<HeaderProps> = ({ allCars, onCarSelect }) => {
     <header className="sticky top-0 z-50 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo -  LEFT */}
-        <div className="w-[200px]">
-          <h1 className="text-xl font-bold hover:scale-105 transition-all duration-300">
+        <div className="w-[90px] md:w-[200px]">
+          <h1 className="text-sm md:text-xl font-bold hover:scale-105 transition-all duration-300">
             Rent-A-Car
           </h1>
         </div>
 
         {/* Search - MIDDLE */}
-        <div className="hidden md:flex flex-1 justify-center items-center gap-4 max-w-3xl">
+        <div className=" flex flex-1 justify-center items-center gap-4 max-w-3xl">
           <div className="w-full max-w-3xl">
             <SearchBox cars={allCars} onCarSelect={onCarSelect} />
           </div>
         </div>
 
         {/* Mode Toggle - RIGHT */}
-        <div className="w-[200px] flex justify-end">
-          <ModeToggle />
+        <div className="md:w-[200px] flex justify-end">
+          <div className="hidden md:block">
+            <ModeToggle />
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -64,6 +66,7 @@ const Header: React.FC<HeaderProps> = ({ allCars, onCarSelect }) => {
             {/* Menu */}
             <div className="fixed inset-y-0 right-0 w-[300px] bg-background shadow-lg flex flex-col h-full z-[51]">
               <div className="p-4 border-b flex items-center justify-between shrink-0">
+                <ModeToggle />
                 <button
                   onClick={() => setMobileMenuOpen(false)}
                   className="p-2 hover:bg-accent rounded-md transition-colors"

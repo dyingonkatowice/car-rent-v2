@@ -1,8 +1,20 @@
+import React, { useEffect } from "react";
 export const ModeToggle = () => {
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  };
   return (
     <button
       className="p-2 rounded-md hover:bg-accent border border-gray-200 dark:border-gray-800"
-      onClick={() => document.documentElement.classList.toggle('dark')}
+      onClick={toggleTheme}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -42,4 +54,4 @@ export const ModeToggle = () => {
       </svg>
     </button>
   );
-}; 
+};
