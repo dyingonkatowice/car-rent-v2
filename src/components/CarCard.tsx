@@ -1,42 +1,30 @@
-import { useState } from 'react';
-import RentModal from './RentModal';
-import CarDetailsModal from './CarDetailsModal';
-import { Button } from './ui/button';
-import { Car as Fuel, Users } from 'lucide-react';
-
-interface CarSpec {
-  engine: string;
-  power: string;
-  acceleration: string;
-  fuelType: string;
-  seating: string;
-  price: string;
-  description: string;
-}
+import { useState } from "react";
+import RentModal from "./RentModal";
+import CarDetailsModal from "./CarDetailsModal";
+import { Button } from "./ui/button";
+import { Car as Fuel, Users } from "lucide-react";
+import { Car } from "@/data";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface CarCardProps {
-  name: string;
-  year: number;
-  transmission: string;
-  imageUrl: string;
-  specs: CarSpec;
+  car: Car;
   onSelect: () => void;
 }
 
-const CarCard = ({ name, year, transmission, imageUrl, specs, onSelect }: CarCardProps) => {
+const CarCard = ({ car, onSelect }: CarCardProps) => {
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isRentModalOpen, setIsRentModalOpen] = useState(false);
 
   return (
     <>
-      <div 
+      <div
         className="group relative bg-card rounded-lg border border-border shadow-sm hover:shadow-lg transition-all overflow-hidden cursor-pointer"
         onClick={() => onSelect()}
       >
         <div className="aspect-[16/9] overflow-hidden">
-          <img
-            src={imageUrl}
-            alt={name}
+          <LazyLoadImage
+            src={car.imageUrl}
+            alt={car.name}
             className="w-full h-full object-cover transition-transform group-hover:scale-105"
           />
         </div>
@@ -44,22 +32,25 @@ const CarCard = ({ name, year, transmission, imageUrl, specs, onSelect }: CarCar
         <div className="p-4 space-y-3">
           <div className="flex items-start justify-between">
             <div>
-              <h3 className="font-semibold text-lg">{name}</h3>
-              <p className="text-sm text-muted-foreground">{year} · {transmission}</p>
+              <h3 className="font-semibold text-lg">{car.name}</h3>
+              <p className="text-sm text-muted-foreground">
+                {car.year} · {car.transmission}
+              </p>
             </div>
             <p className="font-bold text-right">
-              {specs.price}<span className="text-sm font-normal">/day</span>
+              {car.specs.price}
+              <span className="text-sm font-normal">/day</span>
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-2 text-sm">
             <div className="flex items-center gap-2">
               <Fuel className="h-4 w-4 text-primary" />
-              <span>{specs.fuelType}</span>
+              <span>{car.specs.fuelType}</span>
             </div>
             <div className="flex items-center gap-2">
               <Users className="h-4 w-4 text-primary" />
-              <span>{specs.seating} seats</span>
+              <span>{car.specs.seating} seats</span>
             </div>
           </div>
 
@@ -78,7 +69,7 @@ const CarCard = ({ name, year, transmission, imageUrl, specs, onSelect }: CarCar
               className="flex-1"
               onClick={(e) => {
                 e.stopPropagation();
-                onSelect();
+                setIsRentModalOpen(true);
               }}
             >
               Rent Now
@@ -92,21 +83,21 @@ const CarCard = ({ name, year, transmission, imageUrl, specs, onSelect }: CarCar
         onClose={() => setIsDetailsModalOpen(false)}
         car={{
           id: 0,
-          name,
-          year,
-          transmission,
-          imageUrl,
-          specs
+          name: car.name,
+          year: car.year,
+          transmission: car.transmission,
+          imageUrl: car.imageUrl,
+          specs: car.specs,
         }}
       />
 
       <RentModal
         isOpen={isRentModalOpen}
         onClose={() => setIsRentModalOpen(false)}
-        carName={name}
+        carName={car.name}
       />
     </>
   );
 };
 
-export default CarCard; 
+export default CarCard;

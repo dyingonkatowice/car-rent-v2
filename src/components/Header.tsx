@@ -1,50 +1,54 @@
-import { ModeToggle } from './ModeToggle';
-import SearchBox from './SearchBox';
-import { useState } from 'react';
+import { ModeToggle } from "./ModeToggle";
+import SearchBox from "./SearchBox";
+import { useState } from "react";
 interface HeaderProps {
   allCars: any[];
   onCarSelect: (car: any) => void;
 }
 
-const Header = ({ allCars, onCarSelect }: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({ allCars, onCarSelect }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Logo - solda */}
-        <div className="w-[200px]">
-          <h1 className="text-xl font-bold">Rent-A-Car</h1>
+        {/* Logo -  LEFT */}
+        <div className="w-[90px] md:w-[200px]">
+          <h1 className="text-sm md:text-xl font-bold hover:scale-105 transition-all duration-300">
+            Rent-A-Car
+          </h1>
         </div>
 
         {/* Search - MIDDLE */}
-        <div className="hidden md:flex flex-1 justify-center items-center gap-4 max-w-3xl">
+        <div className=" flex flex-1 justify-center items-center gap-4 max-w-3xl">
           <div className="w-full max-w-3xl">
             <SearchBox cars={allCars} onCarSelect={onCarSelect} />
           </div>
         </div>
 
         {/* Mode Toggle - RIGHT */}
-        <div className="w-[200px] flex justify-end">
-          <ModeToggle />
-          
+        <div className="md:w-[200px] flex justify-end">
+          <div className="hidden md:block">
+            <ModeToggle />
+          </div>
+
           {/* Mobile Menu Button */}
-          <button 
+          <button
             className="block md:hidden p-2 ml-2"
             onClick={() => setMobileMenuOpen(true)}
           >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-6 w-6" 
-              fill="none" 
-              viewBox="0 0 24 24" 
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M4 6h16M4 12h16M4 18h16" 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
           </button>
@@ -54,31 +58,32 @@ const Header = ({ allCars, onCarSelect }: HeaderProps) => {
         {mobileMenuOpen && (
           <div className="fixed md:hidden inset-0 z-50">
             {/* Overlay */}
-            <div 
+            <div
               className="absolute inset-0 bg-background/80 backdrop-blur-sm"
               onClick={() => setMobileMenuOpen(false)}
             />
-            
+
             {/* Menu */}
             <div className="fixed inset-y-0 right-0 w-[300px] bg-background shadow-lg flex flex-col h-full z-[51]">
               <div className="p-4 border-b flex items-center justify-between shrink-0">
-                <button 
-                  onClick={() => setMobileMenuOpen(false)} 
+                <ModeToggle />
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
                   className="p-2 hover:bg-accent rounded-md transition-colors"
                   aria-label="Close menu"
                 >
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-6 w-6" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2} 
-                      d="M6 18L18 6M6 6l12 12" 
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
                 </button>
@@ -97,8 +102,8 @@ const Header = ({ allCars, onCarSelect }: HeaderProps) => {
                       }}
                       className="w-full p-3 flex items-center gap-3 hover:bg-accent rounded-lg transition-colors"
                     >
-                      <img 
-                        src={car.imageUrl} 
+                      <img
+                        src={car.imageUrl}
                         alt={car.name}
                         className="w-16 h-16 object-cover rounded-md"
                       />

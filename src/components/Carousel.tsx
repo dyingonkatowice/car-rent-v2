@@ -1,67 +1,61 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import RentModal from "@/components/RentModal";
+import { Car } from "@/data";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface CarouselProps {
-  cars: Array<{
-    id: number;
-    name: string;
-    imageUrl: string;
-    year: number;
-    transmission: string;
-    specs: {
-      engine: string;
-      power: string;
-      acceleration: string;
-      fuelType: string;
-      seating: string;
-      price: string;
-      description: string;
-    };
-  }>;
-  onCarSelect: (car: CarouselProps['cars'][0]) => void;
+  cars: Car[];
+  onCarSelect: (car: Car) => void;
 }
 
 const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showRentModal, setShowRentModal] = useState(false);
   const [] = useState(false);
-  const [selectedCar] = useState<CarouselProps['cars'][0] | null>(null);
+  const [selectedCar] = useState<Car | null>(null);
 
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? displayedCars.length - 1 : prevIndex - 1
+    );
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 2 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === displayedCars.length - 1 ? 0 : prevIndex + 1
+    );
   };
 
-
   // only show 3 cars
-  const displayedCars = cars.slice(0, 3);
+
+  //Cars in carousell displayed based of if recommended or not
+
+  const displayedCars = cars.filter((e) => e.specs.recomended === true);
+  console.log(displayedCars);
 
   return (
     <>
       <div className="relative w-full overflow-hidden rounded-lg border border-border shadow-lg">
-        <div 
+        <div
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {displayedCars.map((car) => (
-            <div 
+            <div
               key={car.id}
               className="w-full flex-shrink-0 cursor-pointer"
               onClick={() => onCarSelect(car)}
             >
               <div className="relative aspect-[16/9] md:aspect-[21/9]">
-                <img
+                <LazyLoadImage
                   src={car.imageUrl}
                   alt={car.name}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-                
+
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
                   <h3 className="text-2xl md:text-3xl font-bold drop-shadow-lg">
@@ -71,7 +65,7 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
                     <p className="text-lg opacity-90 drop-shadow-lg">
                       {car.specs.price}/day
                     </p>
-                    <Button 
+                    <Button
                       className="bg-black/40 hover:bg-black/60 text-white backdrop-blur-sm"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -108,7 +102,7 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-white' : 'bg-white/50'
+                index === currentIndex ? "bg-white" : "bg-white/50"
               }`}
             />
           ))}
@@ -127,4 +121,4 @@ const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
   );
 };
 
-export default Carousel; 
+export default Carousel;
