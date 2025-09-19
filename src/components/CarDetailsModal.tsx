@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { useState } from "react";
 import {
   Dialog,
@@ -10,6 +11,10 @@ import { Fuel, Gauge, Power, Users, DollarSign, Cog } from "lucide-react";
 import RentModal from "@/components/RentModal";
 import { Car } from "@/data";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+=======
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Car } from "../utils/firebase-admin";
+>>>>>>> Stashed changes
 
 interface CarDetailsModalProps {
   isOpen: boolean;
@@ -18,9 +23,8 @@ interface CarDetailsModalProps {
 }
 
 const CarDetailsModal = ({ isOpen, onClose, car }: CarDetailsModalProps) => {
-  const [showRentModal, setShowRentModal] = useState(false);
-
   return (
+<<<<<<< Updated upstream
     <Dialog open={isOpen} onOpenChange={() => onClose()}>
       <DialogContent className="w-full h-[100dvh] md:h-auto md:max-w-[600px] p-0 overflow-y-auto">
         <div className="relative h-[200px] md:h-[300px] w-full">
@@ -81,45 +85,57 @@ const CarDetailsModal = ({ isOpen, onClose, car }: CarDetailsModalProps) => {
                 <p className="font-medium">{car.specs.price}</p>
               </div>
             </div>
+=======
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-3xl">
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Car Image */}
+          <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+            <img
+              src={car.imageUrl}
+              alt={car.name}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+>>>>>>> Stashed changes
           </div>
 
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold">About this car</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              {car.specs.description}
-            </p>
-          </div>
+          {/* Car Details */}
+          <div className="space-y-4">
+            <div>
+              <h2 className="text-2xl font-bold">{car.name}</h2>
+              <p className="text-muted-foreground">
+                {car.year} · {car.transmission}
+              </p>
+            </div>
 
-          <div className="space-y-2">
-            <h3 className="text-lg font-semibold">Key Features</h3>
-            <ul className="grid grid-cols-2 gap-2 text-muted-foreground">
-              <li className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                Premium Sound System
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                Navigation System
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                Leather Seats
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                Parking Sensors
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                Bluetooth
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                Climate Control
-              </li>
-            </ul>
-          </div>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Engine</span>
+                <span className="font-medium">{car.specs.engine}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Power</span>
+                <span className="font-medium">{car.specs.power}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Acceleration</span>
+                <span className="font-medium">{car.specs.acceleration}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Fuel Type</span>
+                <span className="font-medium">{car.specs.fuelType}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Seating</span>
+                <span className="font-medium">{car.specs.seating} seats</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Price per day</span>
+                <span className="font-medium">{car.specs.price}</span>
+              </div>
+            </div>
 
+<<<<<<< Updated upstream
           <div className="flex flex-col md:flex-row gap-3 pt-4 border-t mt-4">
             <Button
               variant="outline"
@@ -134,15 +150,12 @@ const CarDetailsModal = ({ isOpen, onClose, car }: CarDetailsModalProps) => {
             >
               Rent Now
             </Button>
+=======
+            <p className="text-muted-foreground">{car.specs.description}</p>
+>>>>>>> Stashed changes
           </div>
         </div>
       </DialogContent>
-
-      <RentModal
-        isOpen={showRentModal}
-        onClose={() => setShowRentModal(false)}
-        carName={car.name}
-      />
     </Dialog>
   );
 };

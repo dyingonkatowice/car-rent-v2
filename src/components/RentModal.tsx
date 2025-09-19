@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Calendar } from "@/components/ui/calendar";
@@ -8,13 +9,30 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { CalendarIcon, Car as CarIcon, Mail, Phone, User, MapPin } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+=======
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "../components/ui/dialog";
+import { Calendar } from "../components/ui/calendar";
+import { Button } from "../components/ui/button";
+import { Car } from '../utils/firebase-admin';
+import { createRental } from '../utils/firebase-admin';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../config/firebase';
+import { Timestamp } from 'firebase/firestore';
+>>>>>>> Stashed changes
 
 interface RentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  carName: string;
+  car: Car;
 }
 
+<<<<<<< Updated upstream
 const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
@@ -24,11 +42,53 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
     phone: '',
     address: ''
   });
+=======
+const calculateRentalPrice = (dailyRate: number, startDate: Date, endDate: Date): number => {
+  const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  return dailyRate * diffDays;
+};
+>>>>>>> Stashed changes
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    // Form submitted successfully
-    onClose();
+const RentModal = ({ isOpen, onClose, car }: RentModalProps) => {
+  const [user] = useAuthState(auth);
+  const [startDate, setStartDate] = useState<Date | undefined>();
+  const [endDate, setEndDate] = useState<Date | undefined>();
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleRent = async () => {
+    if (!user) {
+      setError('Please sign in to rent a car');
+      return;
+    }
+
+    if (!startDate || !endDate) {
+      setError('Please select both start and end dates');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const rental = {
+        carId: car.id!,
+        userId: user.uid,
+        startDate: Timestamp.fromDate(startDate),
+        endDate: Timestamp.fromDate(endDate),
+        totalPrice: calculateRentalPrice(car.specs.price, startDate, endDate),
+        status: 'pending' as const,
+        paymentStatus: 'pending' as const
+      };
+
+      await createRental(rental);
+      onClose();
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Failed to create rental');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
 /*  function setShowCarDetails(arg0: boolean): void {
@@ -37,8 +97,9 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
+<<<<<<< Updated upstream
           <DialogTitle className="text-2xl font-bold flex items-center gap-2">
             <CarIcon className="h-6 w-6" />
             Rent {carName}
@@ -53,13 +114,16 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
           >
             View Car Details
           </Button>
+=======
+          <DialogTitle>Rent {car.name}</DialogTitle>
+>>>>>>> Stashed changes
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-6 mt-4">
-          {/* Personal Information */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Personal Information</h3>
+        <div className="grid gap-4 py-4">
+          <div className="space-y-2">
+            <h4 className="font-medium">Select Dates</h4>
             <div className="grid gap-4">
+<<<<<<< Updated upstream
               <div className="relative">
                 <Label htmlFor="name" className="text-sm font-medium flex items-center gap-2 mb-1.5">
                   <User className="h-4 w-4" />
@@ -128,10 +192,32 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
                     className="w-full pl-4 text-left"
                   />
                 </div>
+=======
+              <div>
+                <label className="text-sm text-muted-foreground">Start Date</label>
+                <Calendar
+                  mode="single"
+                  selected={startDate}
+                  onSelect={setStartDate}
+                  disabled={(date) => date < new Date()}
+                  className="rounded-md border"
+                />
+              </div>
+              <div>
+                <label className="text-sm text-muted-foreground">End Date</label>
+                <Calendar
+                  mode="single"
+                  selected={endDate}
+                  onSelect={setEndDate}
+                  disabled={(date) => date < (startDate || new Date())}
+                  className="rounded-md border"
+                />
+>>>>>>> Stashed changes
               </div>
             </div>
           </div>
 
+<<<<<<< Updated upstream
           {/* Rental Period */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Rental Period</h3>
@@ -192,20 +278,43 @@ const RentModal = ({ isOpen, onClose, carName }: RentModalProps) => {
                     />
                   </PopoverContent>
                 </Popover>
+=======
+          {startDate && endDate && (
+            <div className="space-y-2">
+              <h4 className="font-medium">Rental Summary</h4>
+              <div className="rounded-lg border p-4 space-y-2">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Start Date</span>
+                  <span>{startDate.toLocaleDateString()}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">End Date</span>
+                  <span>{endDate.toLocaleDateString()}</span>
+                </div>
+                <div className="flex justify-between font-medium">
+                  <span>Total Price</span>
+                  <span>${calculateRentalPrice(car.specs.price, startDate, endDate).toFixed(2)}</span>
+                </div>
+>>>>>>> Stashed changes
               </div>
             </div>
-          </div>
+          )}
 
-          <div className="flex justify-end gap-3 pt-4 border-t">
-            <Button variant="outline" type="button" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button type="submit" className="gap-2">
-              <CarIcon className="h-4 w-4" />
-              Complete Reservation
-            </Button>
-          </div>
-        </form>
+          {error && (
+            <div className="text-sm text-red-500">
+              {error}
+            </div>
+          )}
+        </div>
+
+        <div className="flex justify-end gap-3">
+          <Button variant="outline" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button onClick={handleRent} disabled={!startDate || !endDate || isLoading}>
+            {isLoading ? 'Creating rental...' : 'Rent Now'}
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
   );

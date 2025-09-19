@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { useState } from "react";
 import RentModal from "./RentModal";
 import CarDetailsModal from "./CarDetailsModal";
@@ -97,6 +98,75 @@ const CarCard = ({ car, onSelect }: CarCardProps) => {
         carName={car.name}
       />
     </>
+=======
+import { Button } from './ui/button';
+import { Car as Fuel, Users } from 'lucide-react';
+import { Car } from "../utils/firebase-admin";
+
+interface CarCardProps extends Omit<Car, 'id'> {
+  onSelect: () => void;
+}
+
+const CarCard = ({ name, year, transmission, imageUrl, specs, onSelect }: CarCardProps) => {
+  return (
+    <div 
+      className="group relative bg-card rounded-lg border border-border shadow-sm hover:shadow-lg transition-all overflow-hidden cursor-pointer"
+      onClick={() => onSelect()}
+    >
+      <div className="aspect-[16/9] overflow-hidden">
+        <img
+          src={imageUrl}
+          alt={name}
+          className="w-full h-full object-cover transition-transform group-hover:scale-105"
+        />
+      </div>
+
+      <div className="p-4 space-y-3">
+        <div className="flex items-start justify-between">
+          <div>
+            <h3 className="font-semibold text-lg">{name}</h3>
+            <p className="text-sm text-muted-foreground">{year} · {transmission}</p>
+          </div>
+          <p className="font-bold text-right">
+            {specs.price}<span className="text-sm font-normal">/day</span>
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2 text-sm">
+          <div className="flex items-center gap-2">
+            <Fuel className="h-4 w-4 text-primary" />
+            <span>{specs.fuelType}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Users className="h-4 w-4 text-primary" />
+            <span>{specs.seating} seats</span>
+          </div>
+        </div>
+
+        <div className="flex gap-2 pt-3">
+          <Button
+            variant="outline"
+            className="flex-1"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect();
+            }}
+          >
+            Details
+          </Button>
+          <Button
+            className="flex-1"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect();
+            }}
+          >
+            Rent Now
+          </Button>
+        </div>
+      </div>
+    </div>
+>>>>>>> Stashed changes
   );
 };
 

@@ -1,17 +1,28 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ModeToggle } from "./ModeToggle";
 import SearchBox from "./SearchBox";
-import { useState } from "react";
+import { Car } from "../utils/firebase-admin";
+import { Button } from "./ui/button";
+import { auth } from '../config/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import AuthModal from './auth/AuthModal';
+import UserMenu from './auth/UserMenu';
+
 interface HeaderProps {
-  allCars: any[];
-  onCarSelect: (car: any) => void;
+  allCars: Car[];
+  onCarSelect: (car: Car) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ allCars, onCarSelect }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [user] = useAuthState(auth);
 
   return (
     <header className="sticky top-0 z-50 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+<<<<<<< Updated upstream
         {/* Logo -  LEFT */}
         <div className="w-[90px] md:w-[200px]">
           <h1 className="text-sm md:text-xl font-bold hover:scale-105 transition-all duration-300">
@@ -21,16 +32,42 @@ const Header: React.FC<HeaderProps> = ({ allCars, onCarSelect }) => {
 
         {/* Search - MIDDLE */}
         <div className=" flex flex-1 justify-center items-center gap-4 max-w-3xl">
+=======
+        {/* Logo */}
+        <div className="w-[100px] lg:w-[200px]">
+          <Link to="/" className="hover:opacity-80 transition-opacity">
+            <h1 className="text-sm md:text-lg lg:text-xl font-bold">
+              Rent-A-Car
+            </h1>
+          </Link>
+        </div>
+
+        {/* Search */}
+        <div className="md:flex flex-1 justify-center items-center gap-4 max-w-3xl">
+>>>>>>> Stashed changes
           <div className="w-full max-w-3xl">
-            <SearchBox cars={allCars} onCarSelect={onCarSelect} />
+            <SearchBox cars={allCars} onSelect={onCarSelect} />
           </div>
         </div>
 
+<<<<<<< Updated upstream
         {/* Mode Toggle - RIGHT */}
         <div className="md:w-[200px] flex justify-end">
           <div className="hidden md:block">
             <ModeToggle />
           </div>
+=======
+        {/* Auth & Mode Toggle */}
+        <div className="w-[200px] flex justify-end items-center gap-2">
+          {user ? (
+            <UserMenu user={user} />
+          ) : (
+            <Button onClick={() => setShowAuthModal(true)}>
+              Sign In
+            </Button>
+          )}
+          <ModeToggle />
+>>>>>>> Stashed changes
 
           {/* Mobile Menu Button */}
           <button
@@ -110,7 +147,7 @@ const Header: React.FC<HeaderProps> = ({ allCars, onCarSelect }) => {
                       <div className="text-left">
                         <div className="font-medium">{car.name}</div>
                         <div className="text-sm text-muted-foreground">
-                          {car.specs.price}/day
+                          ${car.specs.price}/day
                         </div>
                       </div>
                     </button>
@@ -121,6 +158,12 @@ const Header: React.FC<HeaderProps> = ({ allCars, onCarSelect }) => {
           </div>
         )}
       </div>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+      />
     </header>
   );
 };

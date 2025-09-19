@@ -2,8 +2,12 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import RentModal from "@/components/RentModal";
+<<<<<<< Updated upstream
 import { Car } from "@/data";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+=======
+import { Car } from "../utils/firebase-admin";
+>>>>>>> Stashed changes
 
 interface CarouselProps {
   cars: Car[];
@@ -13,7 +17,10 @@ interface CarouselProps {
 const Carousel = ({ cars, onCarSelect }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showRentModal, setShowRentModal] = useState(false);
+<<<<<<< Updated upstream
   const [] = useState(false);
+=======
+>>>>>>> Stashed changes
   const [selectedCar] = useState<Car | null>(null);
 
   const handlePrevious = () => {

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { useState, useMemo, useCallback } from "react";
 import { Search, ChevronUp, ChevronDown, Calendar, Cog } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
@@ -142,48 +143,63 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
     setShowSearchResults(true);
   };
   console.log(allCars);
+=======
+import { useState } from 'react';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Search } from 'lucide-react';
+import { Car } from '../utils/firebase-admin';
+
+interface SearchBoxProps {
+  cars: Car[];
+  onSelect: (car: Car) => void;
+}
+
+const SearchBox = ({ cars, onSelect }: SearchBoxProps) => {
+  const [open, setOpen] = useState(false);
+
+>>>>>>> Stashed changes
   return (
-    <div className="relative w-full">
-      <div className="flex gap-2">
-        <div className="relative flex-1">
-          <input
-            type="text"
-            placeholder="Search for cars..."
-            defaultValue={searchQuery}
-            onChange={(e) => {
-              debouncedSetSearchQuery(e.target.value);
-              setIsDropdownOpen(true);
-            }}
-            onFocus={() => {
-              setIsDropdownOpen(true);
-              setShowAdvanced(false);
-              setShowSearchResults(false);
-            }}
-            onBlur={() => setTimeout(() => setIsDropdownOpen(false), 200)}
-            className="w-full h-10 px-4 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-          />
-          {isDropdownOpen && searchQuery && (
-            <div
-              className="absolute top-full left-0 right-0 mt-1 max-h-[400px] overflow-auto rounded-lg border border-border bg-background shadow-lg z-50"
-              onMouseDown={(e) => e.preventDefault()}
-            >
-              {paginatedCars.length > 0 ? (
-                paginatedCars.map((car) => (
-                  <div
-                    key={car.id}
-                    className="p-3 hover:bg-accent cursor-pointer border-b border-border last:border-0"
-                    onClick={() => {
-                      onCarSelect(car);
-                      setSearchQuery("");
-                      setIsDropdownOpen(false);
-                    }}
-                  >
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-full justify-between"
+        >
+          <Search className="mr-2 h-4 w-4" />
+          Search cars...
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-full p-0" align="start">
+        <Command>
+          <CommandInput placeholder="Search cars..." />
+          <CommandEmpty>No cars found.</CommandEmpty>
+          <CommandGroup>
+            {cars.map((car) => (
+              <CommandItem
+                key={car.id}
+                value={car.name}
+                onSelect={() => {
+                  onSelect(car);
+                  setOpen(false);
+                }}
+              >
+                <div className="flex items-center">
+                  <img
+                    src={car.imageUrl}
+                    alt={car.name}
+                    className="h-8 w-8 rounded object-cover mr-2"
+                  />
+                  <div>
                     <div className="font-medium">{car.name}</div>
                     <div className="text-sm text-muted-foreground">
-                      {car.year} · {car.transmission} · {car.specs.engine} ·{" "}
-                      {car.specs.power} · {car.specs.price}/day
+                      ${car.specs.price}/day
                     </div>
                   </div>
+<<<<<<< Updated upstream
                 ))
               ) : (
                 <div className="p-3 text-muted-foreground">No cars found</div>
@@ -478,6 +494,15 @@ const SearchBox = ({ cars, onCarSelect }: SearchBoxProps) => {
         </div>
       )}
     </div>
+=======
+                </div>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </Command>
+      </PopoverContent>
+    </Popover>
+>>>>>>> Stashed changes
   );
 };
 
